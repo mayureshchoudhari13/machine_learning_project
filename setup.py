@@ -1,5 +1,5 @@
 
-from setuptools import setup
+from setuptools import setup , find_packages
 from typing import List
 
 
@@ -8,7 +8,6 @@ PROJECT_NAME = "housing-predictor"
 VERSION = "0.0.1"
 AUTHOR = "Mayuresh Choudhari"
 DESCRIPTION = "this is first ML project"
-PACKAGE = ["housing"]
 REQUIREMENT_FILE_NAME="requirements.txt"
 
 def get_requirements_list() -> List[str]:
@@ -19,7 +18,7 @@ def get_requirements_list() -> List[str]:
     of libraries mentioned in requirements.txt file
     """
     with open(REQUIREMENT_FILE_NAME) as requirement_file:
-        requirement_list = requirement_file.readlines()
+        requirement_list = requirement_file.readlines().remove("-e .")
        
 
 setup(
@@ -28,6 +27,8 @@ setup(
     version=VERSION ,
     author=AUTHOR ,
     description=DESCRIPTION ,
-    packages= PACKAGE ,
+    packages= find_packages() , # it will return those folder which have __init_.py in it , that is pakages. like housing
+
+
     install_requires= get_requirements_list()
 )
